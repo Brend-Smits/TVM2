@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         questionAnswerMap.put(3, new String[] {"4.1", "4.2", "4.3", "4.4"} );
         questionAnswerMap.put(4, new String[] {"5.1", "5.2", "5.3", "5.4"} );
         questionAnswerMap.put(5, new String[] {"6.1", "6.2", "6.3", "6.4"} );
-        //poep
+        //po
 
         //stop alle data van de database in de hashmaps
         /*
