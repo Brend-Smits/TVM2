@@ -6,6 +6,7 @@ package activitymain.mainactivity;
         //import android.telecom.Connection;
         import android.view.View;
         import android.widget.Button;
+        import android.widget.ProgressBar;
         import android.widget.TextView;
         import java.sql.Connection;
         import java.sql.DriverManager;
@@ -30,10 +31,22 @@ public class MainActivity extends AppCompatActivity {
     Connection connection;
     int currentScore;
     TextView questionTextView;
+    ProgressBar pb;
+    TextView tbResult;
 
+
+
+    //This will contain the id and all possible answers
     HashMap<Integer, String[]> questionAnswerMap = new HashMap<Integer, String[]>();
+
+    //This will contain the id's and the correct answer
     HashMap<Integer, String> answerMap = new HashMap<Integer, String>();
+
+    //This will contain the id's and questions
     HashMap<Integer, String> questionMap = new HashMap<Integer, String>();
+
+    //This will contain the id's and fitting explanation
+    HashMap<Integer, String> explanationMap = new HashMap<Integer, String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
 
         DBConnect connect = new DBConnect();
         ResultSet rsAnswers = connect.getData("SELECT * FROM antwoorden");
+
+
+
         //find the buttons
         questionTextView = (TextView) findViewById(R.id.QuestionTextView);
         answerBtn1 = (Button) findViewById(R.id.answerBtn1);
@@ -107,6 +123,12 @@ public class MainActivity extends AppCompatActivity {
         currentQuestion = 0;
         questionPositions = getRandomPermutation(questionAnswerMap.size());
 
+
+        //progressbar
+        pb = (ProgressBar) findViewById(R.id.progressBar);
+        pb.setMax(questionMap.size() + 1);
+        tbResult = (TextView) findViewById(R.id.tbProgress);
+        tbResult.setText((currentQuestion + 1) +"");
     }
 
 
@@ -143,6 +165,9 @@ public class MainActivity extends AppCompatActivity {
             }catch(Exception ex){}
             pressedButton.clearAnimation();
             populate();
+
+            pb.setProgress(currentQuestion );
+            tbResult.setText((currentQuestion) + "" );
         }
     }
 
@@ -176,6 +201,8 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("Exit");
             System.exit(0);
         }
+
+
     }
 
 
