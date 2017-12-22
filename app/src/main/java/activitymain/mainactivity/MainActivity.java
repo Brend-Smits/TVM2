@@ -9,8 +9,14 @@ package activitymain.mainactivity;
         import android.widget.TextView;
         import java.sql.Connection;
         import java.sql.DriverManager;
-
         import java.sql.ResultSet;
+        import java.sql.SQLException;
+       /* import com.mysql.fabric.xmlrpc.Client;
+        import com.mysql.jdbc.MySQLConnection;
+        import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
+        import com.mysql.jdbc.jdbc2.optional.MysqlPooledConnection;*/
+
+        import java.util.Arrays;
         import java.util.HashMap;
         import java.util.Random;
 
@@ -24,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     Connection connection;
     int currentScore;
     TextView questionTextView;
-    WebService service;
 
     HashMap<Integer, String[]> questionAnswerMap = new HashMap<Integer, String[]>();
     HashMap<Integer, String> answerMap = new HashMap<Integer, String>();
@@ -102,8 +107,6 @@ public class MainActivity extends AppCompatActivity {
         currentQuestion = 0;
         questionPositions = getRandomPermutation(questionAnswerMap.size());
 
-        this.service = new WebService();
-        service.getData();
     }
 
 
